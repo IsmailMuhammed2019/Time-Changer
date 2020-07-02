@@ -5,9 +5,13 @@ const time = document.querySelector('#time'),
     name = document.querySelector('#name'),
     focus = document.querySelector('#focus');
 
+    // Options
+    const showAmPm = true;
+
     // Show Time
 
     function showTime(){
+        // let today = new Date(2020, 07, 02, 20, 33, 30);
         let today = new Date(),
         hour = today.getHours(),
         min = today.getMinutes(),
@@ -20,7 +24,7 @@ const time = document.querySelector('#time'),
         hour = hour % 12 || 12;
 
         //Output Time
-        time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}`;
+        time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)} ${showAmPm ? amPm : ''}`;
 
         setTimeout(showTime, 1000);
     }
@@ -32,6 +36,7 @@ const time = document.querySelector('#time'),
 
     // Set Background and Greeting
     function setBgGreet(){
+        // let today = new Date(2020, 07, 02, 20, 33, 30);
         let today = new Date(),
         hour = today.getHours();
 
@@ -81,8 +86,23 @@ function getFocus(){
     }
 }
 
+// Set Focus
+function setFocus(e){
+    if(e.type === 'keypress'){
+        //Make sure enter is pressed
+        if(e.which == 13 || e.keyCode == 13){
+            localStorage.setItem('focus',e.target.innerText);
+            focus.blur();
+        }
+    }else{
+        localStorage.setItem('focus', e.target.innerText);
+    }
+}
+
 name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
+focus.addEventListener('keypress', setFocus);
+focus.addEventListener('blur', setFocus);
 
     //Run
 
