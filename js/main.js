@@ -50,8 +50,27 @@ const time = document.querySelector('#time'),
             document.body.style.color = 'white';
         }
     }
+// Get Name
+function getName(){
+    if(localStorage.getItem('name') == null){
+        name.textContent = '[Enter Name]';
+    }else {
+        name.textContent = localStorage.getItem('name');
+    }
+}
+
+function getFocus(){
+    if(localStorage.getItem('focus') == null){
+        focus.textContent = '[Enter Focus]';
+    }else {
+        focus.textContent = localStorage.getItem('focus');
+    }
+}
+
 
     //Run
 
     showTime();
     setBgGreet();
+    getName();
+    getFocus();
